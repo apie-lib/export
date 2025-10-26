@@ -1,0 +1,42 @@
+{
+  "name": "apie/export",
+  "description": "Composer package of the apie library: export",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Pieter Jordaan",
+      "email": "pieter_jordaan@hotmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Apie\\Export\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Apie\\Tests\\Export\\": "tests/"
+    }
+  },
+  "require": {
+    "php": ">=8.3",
+    "apie/core": "self.version",
+    "apie/serializer": "self.version",
+    "apie/html-builders": "self.version",
+    "guzzlehttp/psr7": "^2.4",
+    "maennchen/zipstream-php": "^3.0",
+    "nyholm/psr7": "^1.8.2"
+  },
+  "extra": {
+    "apie-objects": [
+      "Apie\\Export\\ValueObjects\\FileExtension"
+    ]
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^11.5.2",
+    "phpspec/prophecy-phpunit": "^2.2"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
