@@ -1,0 +1,21 @@
+services:
+  Apie\Export\ExcelExport:
+    tags:
+      - { name: Apie\Export\ExportInterface }
+
+  Apie\Export\ChainedExport:
+    arguments:
+      $exporters:
+        - !tagged_iterator Apie\Export\ExportInterface []
+    tags:
+      - { name: 'apie.context' }
+
+  Apie\Export\ExportInterface:
+    alias: 'Apie\Export\ChainedExport'
+
+  Apie\Export\EntityExport:
+    arguments:
+      $exporters:
+        - '@Apie\HtmlBuilders\Columns\ColumnSelector'
+        - '@Apie\Export\ExportInterface'
+        - '@Apie\Serializer\Serializer'
