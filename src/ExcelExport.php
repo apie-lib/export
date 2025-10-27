@@ -4,7 +4,6 @@ namespace Apie\Export;
 use Apie\Export\Lists\FileExtensionList;
 use Apie\Export\ValueObjects\FileExtension;
 use Nyholm\Psr7\Stream;
-use PHPUnit\Framework\Constraint\FileExists;
 use Psr\Http\Message\StreamInterface;
 use ZipStream\ZipStream;
 

@@ -5,8 +5,7 @@ services:
 
   Apie\Export\ChainedExport:
     arguments:
-      $exporters:
-        - !tagged_iterator Apie\Export\ExportInterface []
+      - !tagged_iterator Apie\Export\ExportInterface
     tags:
       - { name: 'apie.context' }
 
@@ -15,7 +14,8 @@ services:
 
   Apie\Export\EntityExport:
     arguments:
-      $exporters:
-        - '@Apie\HtmlBuilders\Columns\ColumnSelector'
-        - '@Apie\Export\ExportInterface'
-        - '@Apie\Serializer\Serializer'
+      - '@Apie\HtmlBuilders\Columns\ColumnSelector'
+      - '@Apie\Export\ExportInterface'
+      - '@Apie\Serializer\Serializer'
+    tags:
+      - { name: 'apie.context' }

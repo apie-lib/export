@@ -4,14 +4,16 @@ namespace Apie\Export;
 use Apie\Core\Context\ApieContext;
 use Apie\Core\Datalayers\Lists\EntityListInterface;
 use Apie\Core\PropertyAccess;
+use Apie\Export\Lists\FileExtensionList;
 use Apie\HtmlBuilders\Columns\ColumnSelector;
 use Apie\Serializer\Serializer;
+use Psr\Http\Message\StreamInterface;
 
 class EntityExport
 {
     public function __construct(
         private readonly ColumnSelector $columnSelector,
-        private readonly ExcelExport $excelExport,
+        private readonly ExportInterface $exporter,
         private readonly Serializer $serializer
     ) {
     }
@@ -39,6 +41,11 @@ class EntityExport
                 yield array_values($data);
             }
         };
-        return $this->excelExport->streamFromSheets(['Sheet1' => $generator()], $outputFilename);
+        return $this->exporter->streamFromSheets([$resourceName->getShortName() => $generator()], $outputFilename);
+    }
+
+    public function getSupportedExtensions(): FileExtensionList
+    {
+        return $this->exporter->getSupportedExtensions();
     }
 }
