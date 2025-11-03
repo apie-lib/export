@@ -3,6 +3,14 @@ services:
     tags:
       - { name: Apie\Export\ExportInterface }
 
+  Apie\Export\CsvExport:
+    tags:
+      - { name: Apie\Export\ExportInterface }
+
+  Apie\Export\ZippedCsvExport:
+    tags:
+      - { name: Apie\Export\ExportInterface }
+
   Apie\Export\ChainedExport:
     arguments:
       - !tagged_iterator Apie\Export\ExportInterface

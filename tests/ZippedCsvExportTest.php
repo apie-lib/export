@@ -3,17 +3,17 @@ namespace Apie\Tests\Export;
 
 use Apie\Core\Lists\ItemList;
 use Apie\Core\ValueObjects\NonEmptyString;
-use Apie\Export\ExcelExport;
+use Apie\Export\ZippedCsvExport;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use ZipArchive;
 
-class ExcelExportTest extends TestCase
+class ZippedCsvExportTest extends TestCase
 {
     #[Test]
     public function it_can_create_an_excel_file(): void
     {
-        $testItem = new ExcelExport();
+        $testItem = new ZippedCsvExport();
         $stream = $testItem->streamFromSheets([
             'First Sheet' => (function () {
                 yield ['Name', 'Age'];
@@ -29,23 +29,23 @@ class ExcelExportTest extends TestCase
         $this->assertTrue($stream->isReadable());
         // $this->assertFalse($stream->isWritable());
         $contents = $stream->getContents();
-        $this->assertValidExcel($contents);
+        $this->assertValidCsv($contents);
     }
 
-    private function assertValidExcel(string $contents): void
+    private function assertValidCsv(string $contents): void
     {
         $this->assertStringStartsWith('PK', $contents); // ZIP files start with
         
         if (class_exists(ZipArchive::class)) {
             $zip = new ZipArchive();
-            $tempFile = tempnam(sys_get_temp_dir(), 'xlsx');
+            $tempFile = tempnam(sys_get_temp_dir(), 'zip');
             file_put_contents($tempFile, $contents);
-//            file_put_contents(__DIR__ . '/' . md5($contents) . '.xlsx', $contents);
+//            file_put_contents(__DIR__ . '/' . md5($contents) . '.zip', $contents);
             try {
                 $res = $zip->open($tempFile);
-                $this->assertTrue($res === true, 'Failed to open generated XLSX as ZIP archive');
-                $this->assertNotFalse($zip->locateName('xl/worksheets/sheet1.xml'), 'Sheet1.xml not found in XLSX');
-                $this->assertNotFalse($zip->locateName('xl/worksheets/sheet2.xml'), 'Sheet2.xml not found in XLSX');
+                $this->assertTrue($res === true, 'Failed to open generated ZIP as ZIP archive');
+                $this->assertNotFalse($zip->locateName('First Sheet.csv'), 'First Sheet.csv not found in ZIP');
+                $this->assertNotFalse($zip->locateName('Second Sheet.csv'), 'Second sheet.csv not found in ZIP');
                 $zip->close();
             } finally {
                 @unlink($tempFile);
@@ -56,17 +56,17 @@ class ExcelExportTest extends TestCase
     #[Test]
     public function it_can_create_an_excel_file_from_intermediate_data(): void
     {
-        $testItem = new ExcelExport();
+        $testItem = new ZippedCsvExport();
         $stream = $testItem->streamFromSheets([
             'First Sheet' => (function () {
                 yield ['Alice', 30, null, true, false];
                 yield ['Bob', 25, [1,2,3], new ItemList([3,2,1]), NonEmptyString::fromNative('pi')];
             })(),
-            'Second sheet' => [],
+            'Second Sheet' => [],
         ], 'test_export.xlsx');
         $this->assertTrue($stream->isReadable());
         // $this->assertFalse($stream->isWritable());
         $contents = $stream->getContents();
-        $this->assertValidExcel($contents);
+        $this->assertValidCsv($contents);
     }
 }

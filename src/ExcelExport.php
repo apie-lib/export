@@ -2,6 +2,7 @@
 namespace Apie\Export;
 
 use Apie\Core\ValueObjects\Utils;
+use Apie\Export\Concerns\FlattensValues;
 use Apie\Export\Lists\FileExtensionList;
 use Apie\Export\ValueObjects\FileExtension;
 use Nyholm\Psr7\Stream;
@@ -11,6 +12,8 @@ use ZipStream\ZipStream;
 
 class ExcelExport implements ExportInterface
 {
+    use FlattensValues;
+
     public function streamFromSheets(array $sheets, string $outputFilename = 'export.xlsx'): StreamInterface
     {
         // Sanitize and reindex sheet names
@@ -135,7 +138,7 @@ XML;
                         $colLetter = $this->getExcelColumnName($colIndex);
                         if (is_bool($cellValue)) {
                             fwrite($stream, '<c r="' . $colLetter . $rowIndex . '" s="1"><v>' . $cellValue ? '1' : '0' . '</v></c>');
-                        } else if (is_numeric($cellValue)) {
+                        } elseif (is_numeric($cellValue)) {
                             fwrite($stream, '<c r="' . $colLetter . $rowIndex . '" s="1"><v>' . $cellValue . '</v></c>');
                         } else {
                             $escaped = htmlspecialchars((string)$cellValue, ENT_XML1);
@@ -158,19 +161,6 @@ XML;
         $zip->finish();
         rewind($stream);
         return $outputStream;
-    }
-
-    private function toSingleValue(mixed $input): string|int|float|bool|null
-    {
-        $input = Utils::toNative($input);
-        if ($input instanceof UnitEnum) {
-            return $input->name;
-        }
-        if (is_array($input)) {
-            return implode(', ', array_map([$this, 'toSingleValue'], $input));
-        }
-
-        return $input;
     }
 
     public function getSupportedExtensions(): FileExtensionList
