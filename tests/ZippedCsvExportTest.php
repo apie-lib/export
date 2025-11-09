@@ -40,7 +40,7 @@ class ZippedCsvExportTest extends TestCase
             $zip = new ZipArchive();
             $tempFile = tempnam(sys_get_temp_dir(), 'zip');
             file_put_contents($tempFile, $contents);
-//            file_put_contents(__DIR__ . '/' . md5($contents) . '.zip', $contents);
+            //            file_put_contents(__DIR__ . '/' . md5($contents) . '.zip', $contents);
             try {
                 $res = $zip->open($tempFile);
                 $this->assertTrue($res === true, 'Failed to open generated ZIP as ZIP archive');

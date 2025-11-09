@@ -6,7 +6,7 @@ use UnitEnum;
 
 trait FlattensValues
 {
-     private function toSingleValue(mixed $input): string|int|float|bool|null
+    private function toSingleValue(mixed $input): string|int|float|bool|null
     {
         $input = Utils::toNative($input);
         if ($input instanceof UnitEnum) {

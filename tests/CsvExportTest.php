@@ -4,10 +4,8 @@ namespace Apie\Tests\Export;
 use Apie\Core\Lists\ItemList;
 use Apie\Core\ValueObjects\NonEmptyString;
 use Apie\Export\CsvExport;
-use Apie\Export\ZippedCsvExport;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use ZipArchive;
 
 class CsvExportTest extends TestCase
 {

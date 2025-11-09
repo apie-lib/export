@@ -1,13 +1,11 @@
 <?php
 namespace Apie\Export;
 
-use Apie\Core\ValueObjects\Utils;
 use Apie\Export\Concerns\FlattensValues;
 use Apie\Export\Lists\FileExtensionList;
 use Apie\Export\ValueObjects\FileExtension;
 use Nyholm\Psr7\Stream;
 use Psr\Http\Message\StreamInterface;
-use UnitEnum;
 use ZipStream\ZipStream;
 
 class ExcelExport implements ExportInterface

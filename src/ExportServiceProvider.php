@@ -34,6 +34,44 @@ class ExportServiceProvider extends ServiceProvider
         );
         $this->app->tag([\Apie\Export\ExcelExport::class], \Apie\Export\ExportInterface::class);
         $this->app->singleton(
+            \Apie\Export\CsvExport::class,
+            function ($app) {
+                return new \Apie\Export\CsvExport(
+                
+                );
+            }
+        );
+        \Apie\ServiceProviderGenerator\TagMap::register(
+            $this->app,
+            \Apie\Export\CsvExport::class,
+            array(
+              0 =>
+              array(
+                'name' => 'Apie\\Export\\ExportInterface',
+              ),
+            )
+        );
+        $this->app->tag([\Apie\Export\CsvExport::class], \Apie\Export\ExportInterface::class);
+        $this->app->singleton(
+            \Apie\Export\ZippedCsvExport::class,
+            function ($app) {
+                return new \Apie\Export\ZippedCsvExport(
+                
+                );
+            }
+        );
+        \Apie\ServiceProviderGenerator\TagMap::register(
+            $this->app,
+            \Apie\Export\ZippedCsvExport::class,
+            array(
+              0 =>
+              array(
+                'name' => 'Apie\\Export\\ExportInterface',
+              ),
+            )
+        );
+        $this->app->tag([\Apie\Export\ZippedCsvExport::class], \Apie\Export\ExportInterface::class);
+        $this->app->singleton(
             \Apie\Export\ChainedExport::class,
             function ($app) {
                 return new \Apie\Export\ChainedExport(

@@ -1,7 +1,6 @@
 <?php
 namespace Apie\Export;
 
-use Apie\Core\ValueObjects\Utils;
 use Apie\Export\Concerns\FlattensValues;
 use Apie\Export\Lists\FileExtensionList;
 use Apie\Export\ValueObjects\FileExtension;
