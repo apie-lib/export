@@ -23,6 +23,7 @@ class EntityExport
         $columns = $this->columnSelector->getColumns($resourceName, $apieContext);
         $generator = function () use ($entityList, $columns, $apieContext) {
             $first = true;
+            yield $columns;
             foreach ($entityList as $entity) {
                 $data = [];
                 foreach ($columns as $column) {
