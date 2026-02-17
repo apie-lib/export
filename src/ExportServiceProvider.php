@@ -14,7 +14,7 @@ class ExportServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->singleton(
+        $this->registerSingleton(
             \Apie\Export\ExcelExport::class,
             function ($app) {
                 return new \Apie\Export\ExcelExport(
@@ -33,7 +33,7 @@ class ExportServiceProvider extends ServiceProvider
             )
         );
         $this->app->tag([\Apie\Export\ExcelExport::class], \Apie\Export\ExportInterface::class);
-        $this->app->singleton(
+        $this->registerSingleton(
             \Apie\Export\CsvExport::class,
             function ($app) {
                 return new \Apie\Export\CsvExport(
@@ -52,7 +52,7 @@ class ExportServiceProvider extends ServiceProvider
             )
         );
         $this->app->tag([\Apie\Export\CsvExport::class], \Apie\Export\ExportInterface::class);
-        $this->app->singleton(
+        $this->registerSingleton(
             \Apie\Export\ZippedCsvExport::class,
             function ($app) {
                 return new \Apie\Export\ZippedCsvExport(
@@ -71,7 +71,7 @@ class ExportServiceProvider extends ServiceProvider
             )
         );
         $this->app->tag([\Apie\Export\ZippedCsvExport::class], \Apie\Export\ExportInterface::class);
-        $this->app->singleton(
+        $this->registerSingleton(
             \Apie\Export\ChainedExport::class,
             function ($app) {
                 return new \Apie\Export\ChainedExport(
@@ -92,7 +92,7 @@ class ExportServiceProvider extends ServiceProvider
         $this->app->tag([\Apie\Export\ChainedExport::class], 'apie.context');
         $this->app->bind(\Apie\Export\ExportInterface::class, \Apie\Export\ChainedExport::class);
         
-        $this->app->singleton(
+        $this->registerSingleton(
             \Apie\Export\EntityExport::class,
             function ($app) {
                 return new \Apie\Export\EntityExport(
