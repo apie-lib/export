@@ -2,6 +2,7 @@
 namespace Apie\Export\Actions;
 
 use Apie\Core\Attributes\Context;
+use Apie\Core\Attributes\ExampleValue;
 use Apie\Core\Attributes\Not;
 use Apie\Core\Attributes\Requires;
 use Apie\Core\Attributes\Route;
@@ -34,6 +35,8 @@ class ExportAll
         #[Context('filename')]
         ?string $outputFilename = null,
         #[Context('extension')]
+        #[ExampleValue('xlsx', 'Excel 2007+ file')]
+        #[ExampleValue('csv', 'Comma separated values')]
         string $extension = 'xlsx'
     ): UploadedFileInterface {
         return StoredFile::createFromResource(
