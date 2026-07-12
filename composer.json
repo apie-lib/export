@@ -31,8 +31,9 @@
   },
   "extra": {
     "apie-objects": [
-      "Apie\\Export\\ValueObjects\\FileExtension"
-    ]
+    "Apie\\Export\\Lists\\FileExtensionList",
+    "Apie\\Export\\ValueObjects\\FileExtension"
+]
   },
   "require-dev": {
     "illuminate/support": "*",
