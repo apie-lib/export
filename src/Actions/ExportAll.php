@@ -20,7 +20,8 @@ class ExportAll
 {
     #[StaticCheck(
         new Not(new Requires(ConsoleCommand::class)),
-        new Not(new Requires(ContextConstants::MCP_SERVER))
+        new Not(new Requires(ContextConstants::MCP_SERVER)),
+        new Not(new Requires(ContextConstants::MAIN_MENU_BUILDER))
     )]
     #[Route('/export/{resourceName}.{extension}', RequestMethod::GET)]
     public function export(
