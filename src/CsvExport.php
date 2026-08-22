@@ -48,7 +48,7 @@ class CsvExport implements ExportInterface
                 }
             }
             // Use fputcsv for proper escaping
-            fputcsv($stream, $converted, ',', '"');
+            fputcsv($stream, $converted, ',', '"', '\\');
         }
 
         rewind($stream);
