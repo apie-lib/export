@@ -26,6 +26,7 @@
     "apie/html-builders": "self.version",
     "guzzlehttp/psr7": "^2.13",
     "maennchen/zipstream-php": "^3.2",
+    "openspout/openspout": "^5.11",
     "nyholm/psr7": "^1.8.2",
     "symfony/mime":  "^7.2"
   },
@@ -36,6 +37,7 @@
 ]
   },
   "require-dev": {
+    "apie/fixtures": "self.version",
     "illuminate/support": "*",
     "phpunit/phpunit": "^11.5.2",
     "phpspec/prophecy-phpunit": "^2.5"

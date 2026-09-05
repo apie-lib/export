@@ -8,6 +8,10 @@ use Nyholm\Psr7\Stream;
 use Psr\Http\Message\StreamInterface;
 use ZipStream\ZipStream;
 
+/**
+ * This version is broken right now as Excel refuses to read this file. It would be my preference
+ * to generate the Excel file like this for there is no delay in sending the file already.
+ */
 class ExcelExport implements ExportInterface
 {
     use FlattensValues;

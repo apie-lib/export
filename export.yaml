@@ -1,5 +1,5 @@
 services:
-  Apie\Export\ExcelExport:
+  Apie\Export\XlsxExport:
     tags:
       - { name: Apie\Export\ExportInterface }
 
@@ -8,6 +8,10 @@ services:
       - { name: Apie\Export\ExportInterface }
 
   Apie\Export\ZippedCsvExport:
+    tags:
+      - { name: Apie\Export\ExportInterface }
+
+  Apie\Export\OdsExport:
     tags:
       - { name: Apie\Export\ExportInterface }
 

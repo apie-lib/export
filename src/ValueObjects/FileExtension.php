@@ -1,10 +1,11 @@
 <?php
 namespace Apie\Export\ValueObjects;
 
+use Apie\Core\ValueObjects\Interfaces\HasRegexValueObjectInterface;
 use Apie\Core\ValueObjects\Interfaces\StringValueObjectInterface;
 use Apie\Core\ValueObjects\IsStringWithRegexValueObject;
 
-class FileExtension implements StringValueObjectInterface
+class FileExtension implements StringValueObjectInterface, HasRegexValueObjectInterface
 {
     use IsStringWithRegexValueObject;
 

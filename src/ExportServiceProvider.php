@@ -15,16 +15,16 @@ class ExportServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerSingleton(
-            \Apie\Export\ExcelExport::class,
+            \Apie\Export\XlsxExport::class,
             function ($app) {
-                return new \Apie\Export\ExcelExport(
+                return new \Apie\Export\XlsxExport(
                 
                 );
             }
         );
         \Apie\ServiceProviderGenerator\TagMap::register(
             $this->app,
-            \Apie\Export\ExcelExport::class,
+            \Apie\Export\XlsxExport::class,
             array(
               0 =>
               array(
@@ -32,7 +32,7 @@ class ExportServiceProvider extends ServiceProvider
               ),
             )
         );
-        $this->app->tag([\Apie\Export\ExcelExport::class], \Apie\Export\ExportInterface::class);
+        $this->app->tag([\Apie\Export\XlsxExport::class], \Apie\Export\ExportInterface::class);
         $this->registerSingleton(
             \Apie\Export\CsvExport::class,
             function ($app) {
@@ -71,6 +71,25 @@ class ExportServiceProvider extends ServiceProvider
             )
         );
         $this->app->tag([\Apie\Export\ZippedCsvExport::class], \Apie\Export\ExportInterface::class);
+        $this->registerSingleton(
+            \Apie\Export\OdsExport::class,
+            function ($app) {
+                return new \Apie\Export\OdsExport(
+                
+                );
+            }
+        );
+        \Apie\ServiceProviderGenerator\TagMap::register(
+            $this->app,
+            \Apie\Export\OdsExport::class,
+            array(
+              0 =>
+              array(
+                'name' => 'Apie\\Export\\ExportInterface',
+              ),
+            )
+        );
+        $this->app->tag([\Apie\Export\OdsExport::class], \Apie\Export\ExportInterface::class);
         $this->registerSingleton(
             \Apie\Export\ChainedExport::class,
             function ($app) {
